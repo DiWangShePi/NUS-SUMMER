@@ -1,0 +1,6 @@
+version: "2"
+services:
+  ez_timing:
+    build: .
+    ports:
+      - "9994:80"
