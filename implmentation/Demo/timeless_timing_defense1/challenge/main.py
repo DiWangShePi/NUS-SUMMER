@@ -3,12 +3,15 @@
 import time
 from flask import Flask, render_template, request
 import os
+import random
 
 app = Flask(__name__)
 
 FLAG = os.environ["SECRET"]
 assert " " not in FLAG
-TINY_TIME = 0
+
+TINY_TIME_START = 6.114514 * 10 ** -44
+TINY_TIME_END = 6.191981 * 10 ** -44
 
 users = {
     "admin": {"password": "123456"},
@@ -42,9 +45,11 @@ def check_secret(secret):
         if a == " ":
             continue
         elif a != b:
+            time.sleep(random.uniform(TINY_TIME_START, TINY_TIME_END))
             return "WRONG!"
         else:
-            time.sleep(TINY_TIME)
+            time.sleep(random.uniform(TINY_TIME_START, TINY_TIME_END))
+                       
     if " " in secret:
         return "WRONG!"
     return "CORRECT!"
